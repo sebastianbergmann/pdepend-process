@@ -103,7 +103,7 @@
   $(document).ready(function() {
    nv.addGraph(function() {
     var chart = nv.models.multiBarChart();
-    chart.tooltips(false)
+    chart.tooltips(true)
       .showControls(false)
       .showLegend(false)
       .reduceXTicks(false)
@@ -137,7 +137,7 @@
   $(document).ready(function() {
    nv.addGraph(function() {
     var chart = nv.models.multiBarChart();
-    chart.tooltips(false)
+    chart.tooltips(true)
       .showControls(false)
       .showLegend(false)
       .reduceXTicks(false)
@@ -171,7 +171,7 @@
   $(document).ready(function() {
    nv.addGraph(function() {
     var chart = nv.models.multiBarChart();
-    chart.tooltips(false)
+    chart.tooltips(true)
       .showControls(false)
       .showLegend(false)
       .reduceXTicks(false)
@@ -205,4 +205,3 @@
   </script>
  </body>
 </html>
-
