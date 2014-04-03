@@ -1,0 +1,36 @@
+{
+    "name": "sebastian/pdepend-process",
+    "description": "Processor for PHP_Depend data",
+    "homepage": "https://github.com/sebastianbergmann/pdepend-process",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Sebastian Bergmann",
+            "email": "sebastian@phpunit.de",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/sebastianbergmann/pdepend-process/issues"
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "ext-xmlreader": "*",
+        "phpunit/php-text-template": "~1.2",
+        "sebastian/version": "~1.0",
+        "symfony/console": "~2.4"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "bin": [
+        "pdepend-process"
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

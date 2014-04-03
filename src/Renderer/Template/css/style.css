@@ -1,0 +1,5 @@
+.scrollbox {
+ height:245px;
+ overflow-x:hidden;
+ overflow-y:scroll;
+}

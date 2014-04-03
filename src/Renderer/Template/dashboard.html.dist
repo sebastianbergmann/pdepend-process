@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/nv.d3.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <div class="scrollbox">
+      <table class="table table-condensed" id="classes">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Logical Lines of Code (LLOC)</th>
+         <th class="text-right">Code Rank</th>
+         <th class="text-right">Reverse Code Rank</th>
+        </tr>
+       </thead>
+       <tbody>
+{{classes_table}}
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <div class="scrollbox">
+      <table class="table table-condensed" id="methods">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Logical Lines of Code (LLOC)</th>
+         <th class="text-right">Cyclomatic Complexity</th>
+         <th class="text-right">NPath Complexity</th>
+        </tr>
+       </thead>
+       <tbody>
+{{methods_table}}
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script src="js/jquery.js" type="text/javascript"></script>
+  <script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
+  <script src="js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="js/holder.js" type="text/javascript"></script>
+  <script src="js/d3.min.js" type="text/javascript"></script>
+  <script src="js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  $(function(){
+   $("#classes").tablesorter({ sortList: [[1,1]] });
+  });
+  $(function(){
+   $("#methods").tablesorter({ sortList: [[1,1]] });
+  });
+  </script>
+ </body>
+</html>
+
