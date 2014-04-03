@@ -194,7 +194,7 @@ class HtmlRenderer implements RendererInterface
     private function partitionData(array $data)
     {
         $partitions    = array();
-        $numPartitions = ceil(log(count($data), 2) + 1);
+        $numPartitions = ceil(2 * pow(count($data), (1/3)));
         $width         = floor(max($data) / $numPartitions);
 
         foreach ($data as $value) {
