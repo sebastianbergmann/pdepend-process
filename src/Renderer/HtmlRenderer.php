@@ -87,6 +87,18 @@ class HtmlRenderer implements RendererInterface
     {
         $this->copyFiles($this->directory);
 
+        $classLengthChart = $this->renderBarChart(
+            $this->partitionData($data['classLength'])
+        );
+
+        $methodLengthChart = $this->renderBarChart(
+            $this->partitionData($data['methodLength'])
+        );
+
+        $ccnChart = $this->renderBarChart(
+            $this->partitionData($data['ccn'])
+        );
+
         $template = new Text_Template(
             $this->templatePath . 'dashboard.html',
             '{{',
@@ -95,12 +107,32 @@ class HtmlRenderer implements RendererInterface
 
         $template->setVar(
             array(
-                'classes_table' => $this->renderClassesTable($data),
-                'methods_table' => $this->rendermethodsTable($data)
+                'classes_table'        => $this->renderClassesTable($data),
+                'methods_table'        => $this->rendermethodsTable($data),
+                'class_length_labels'  => $classLengthChart['labels'],
+                'class_length_values'  => $classLengthChart['values'],
+                'method_length_labels' => $methodLengthChart['labels'],
+                'method_length_values' => $methodLengthChart['values'],
+                'ccn_labels'           => $ccnChart['labels'],
+                'ccn_values'           => $ccnChart['values'],
             )
         );
 
         $template->renderTo($this->directory . 'index.html');
+    }
+
+    /**
+     * @param  array $data
+     * @return array
+     */
+    private function renderBarChart(array $data)
+    {
+        $result = array(
+            'labels' => json_encode(array_keys($data)),
+            'values' => json_encode(array_values($data))
+        );
+
+        return $result;
     }
 
     /**
@@ -153,6 +185,32 @@ class HtmlRenderer implements RendererInterface
         }
 
         return $buffer;
+    }
+
+    /**
+     * @param  array $data
+     * @return array
+     */
+    private function partitionData(array $data)
+    {
+        $partitions    = array();
+        $numPartitions = floor(sqrt(count($data)));
+        $width         = floor(max($data) / $numPartitions);
+
+        foreach ($data as $value) {
+            $key = floor($value / $width) * $width;
+            $key = $key . '-' . ($key + $width);
+
+            if (!isset($partitions[$key])) {
+                $partitions[$key] = 1;
+            } else {
+                $partitions[$key]++;
+            }
+        }
+
+        ksort($partitions, SORT_NATURAL);
+
+        return $partitions;
     }
 
     /**

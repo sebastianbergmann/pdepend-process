@@ -21,6 +21,14 @@
    </div>
    <div class="row">
     <div class="col-md-12">
+     <h3>Logical Lines of Code (LLOC)</h3>
+     <div id="classLengthDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
      <div class="scrollbox">
       <table class="table table-condensed" id="classes">
        <thead>
@@ -41,6 +49,22 @@
    <div class="row">
     <div class="col-md-12">
      <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h3>Logical Lines of Code (LLOC)</h3>
+     <div id="methodLengthDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h3>Cyclomatic Complexity</h3>
+     <div id="ccnDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
     </div>
    </div>
    <div class="row">
@@ -76,6 +100,108 @@
   $(function(){
    $("#methods").tablesorter({ sortList: [[1,1]] });
   });
+  $(document).ready(function() {
+   nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classLengthDistribution svg')
+      .datum(getClassLengthDistributionData({{class_length_values}}, "Class Length Distribution"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+   });
+  });
+  function getClassLengthDistributionData(data, label) {
+    var labels = {{class_length_labels}};
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  $(document).ready(function() {
+   nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodLengthDistribution svg')
+      .datum(getMethodLengthDistributionData({{method_length_values}}, "Method Length Distribution"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+   });
+  });
+  function getMethodLengthDistributionData(data, label) {
+    var labels = {{method_length_labels}};
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  $(document).ready(function() {
+   nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#ccnDistribution svg')
+      .datum(getCcnDistributionData({{ccn_values}}, "Cyclomatic Complexity Distribution"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+   });
+  });
+  function getCcnDistributionData(data, label) {
+    var labels = {{ccn_labels}};
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
   </script>
  </body>
 </html>
