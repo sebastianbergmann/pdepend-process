@@ -43,6 +43,7 @@
 
 namespace SebastianBergmann\PDEPEND\Process\Renderer;
 
+use SebastianBergmann\PDEPEND\Process\RuntimeException;
 use Text_Template;
 
 /**
@@ -65,7 +66,8 @@ class HtmlRenderer implements RendererInterface
     private $templatePath;
 
     /**
-     * @param string $directory
+     * @param  string $directory
+     * @throws RuntimeException
      */
     public function __construct($directory)
     {
@@ -81,7 +83,8 @@ class HtmlRenderer implements RendererInterface
     }
 
     /**
-     * @param array $data
+     * @param  array $data
+     * @throws RuntimeException
      */
     public function render(array $data)
     {
@@ -214,7 +217,8 @@ class HtmlRenderer implements RendererInterface
     }
 
     /**
-     * @param string $target
+     * @param  string $target
+     * @throws RuntimeException
      */
     private function copyFiles($target)
     {
