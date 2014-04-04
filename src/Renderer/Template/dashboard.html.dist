@@ -111,7 +111,7 @@
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classLengthDistribution svg')
-      .datum(getClassLengthDistributionData({{class_length_values}}, "Class Length Distribution"))
+      .datum(getClassLengthDistributionData({{class_length_values}}, "Class Length"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -145,7 +145,7 @@
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodLengthDistribution svg')
-      .datum(getMethodLengthDistributionData({{method_length_values}}, "Method Length Distribution"))
+      .datum(getMethodLengthDistributionData({{method_length_values}}, "Method Length"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -179,7 +179,7 @@
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#ccnDistribution svg')
-      .datum(getCcnDistributionData({{ccn_values}}, "Cyclomatic Complexity Distribution"))
+      .datum(getCcnDistributionData({{ccn_values}}, "Cyclomatic Complexity"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
