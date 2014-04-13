@@ -102,6 +102,10 @@ class HtmlRenderer implements RendererInterface
             $this->partitionData($data['ccn'])
         );
 
+        $npathChart = $this->renderBarChart(
+            $this->partitionData($data['npath'])
+        );
+
         $template = new Text_Template(
             $this->templatePath . 'dashboard.html',
             '{{',
@@ -118,6 +122,8 @@ class HtmlRenderer implements RendererInterface
                 'method_length_values' => $methodLengthChart['values'],
                 'ccn_labels'           => $ccnChart['labels'],
                 'ccn_values'           => $ccnChart['values'],
+                'npath_labels'         => $npathChart['labels'],
+                'npath_values'         => $npathChart['values']
             )
         );
 

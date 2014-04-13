@@ -69,6 +69,14 @@
    </div>
    <div class="row">
     <div class="col-md-12">
+     <h3>NPath Complexity</h3>
+     <div id="npathDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
      <div class="scrollbox">
       <table class="table table-condensed" id="methods">
        <thead>
@@ -189,6 +197,40 @@
   });
   function getCcnDistributionData(data, label) {
     var labels = {{ccn_labels}};
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  $(document).ready(function() {
+   nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(true)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#npathDistribution svg')
+      .datum(getNpathDistributionData({{npath_values}}, "NPath Complexity"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+   });
+  });
+  function getNpathDistributionData(data, label) {
+    var labels = {{npath_labels}};
     var values = [];
     $.each(labels, function(key) {
       values.push({x: labels[key], y: data[key]});
