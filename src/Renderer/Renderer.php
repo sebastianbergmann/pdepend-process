@@ -8,8 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace SebastianBergmann\PDEPEND\Process;
+namespace SebastianBergmann\PDEPEND\Process\Renderer;
 
-interface Exception
+interface Renderer
 {
+    /**
+     * @param array $data
+     */
+    public function render(array $data);
 }

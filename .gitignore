@@ -1,9 +1,7 @@
-build/phar
-build/SebastianBergmann
-build/*.phar
-build/*.tgz
-.idea
-cache.properties
-composer.phar
-composer.lock
-vendor
+/.idea
+/build/phar
+/build/*.phar*
+/tools
+/vendor
+/.php_cs.cache
+/composer.lock

@@ -1,69 +1,29 @@
 <?php
-/**
- * pdepend-process
+/*
+ * This file is part of pdepend-process.
  *
- * Copyright (c) 2014, Sebastian Bergmann <sebastian@phpunit.de>.
- * All rights reserved.
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *   * Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *
- *   * Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in
- *     the documentation and/or other materials provided with the
- *     distribution.
- *
- *   * Neither the name of Sebastian Bergmann nor the names of his
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- * @package   pdepend-process
- * @author    Sebastian Bergmann <sebastian@phpunit.de>
- * @copyright 2014 Sebastian Bergmann <sebastian@phpunit.de>
- * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since     File available since Release 1.0.0
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace SebastianBergmann\PDEPEND\Process;
 
 use XMLReader;
 
-/**
- * @author    Sebastian Bergmann <sebastian@phpunit.de>
- * @copyright 2014 Sebastian Bergmann <sebastian@phpunit.de>
- * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @link      http://github.com/sebastianbergmann/pdepend-process/tree
- * @since     Class available since Release 1.0.0
- */
 class Parser
 {
     public function parse($file)
     {
-        $classes      = array();
-        $methods      = array();
-        $ccn          = array();
-        $npath        = array();
-        $cr           = array();
-        $rcr          = array();
-        $classLength  = array();
-        $methodLength = array();
+        $classes      = [];
+        $methods      = [];
+        $ccn          = [];
+        $npath        = [];
+        $cr           = [];
+        $rcr          = [];
+        $classLength  = [];
+        $methodLength = [];
 
         $reader = new XMLReader;
         $reader->open($file);
@@ -76,11 +36,11 @@ class Parser
                     $rcr[$class]         = $reader->getAttribute('rcr');
                     $classLength[$class] = $reader->getAttribute('lloc');
 
-                    $classes[$class] = array(
+                    $classes[$class] = [
                         'lloc' => $classLength[$class],
                         'cr'   => $cr[$class],
                         'rcr'  => $rcr[$class]
-                    );
+                    ];
                 }
                 break;
 
@@ -90,11 +50,11 @@ class Parser
                     $npath[$method]        = $reader->getAttribute('npath');
                     $methodLength[$method] = $reader->getAttribute('lloc');
 
-                    $methods[$method] = array(
+                    $methods[$method] = [
                         'lloc'  => $methodLength[$method],
                         'ccn'   => $ccn[$method],
                         'npath' => $npath[$method]
-                    );
+                    ];
                 }
                 break;
             }
@@ -102,22 +62,22 @@ class Parser
 
         $reader->close();
 
-        asort($ccn);
-        asort($npath);
-        asort($cr);
-        asort($rcr);
-        asort($classLength);
-        asort($methodLength);
+        \asort($ccn);
+        \asort($npath);
+        \asort($cr);
+        \asort($rcr);
+        \asort($classLength);
+        \asort($methodLength);
 
-        return array(
-            'ccn'          => array_reverse($ccn),
-            'npath'        => array_reverse($npath),
-            'cr'           => array_reverse($cr),
-            'rcr'          => array_reverse($rcr),
-            'classLength'  => array_reverse($classLength),
-            'methodLength' => array_reverse($methodLength),
+        return [
+            'ccn'          => \array_reverse($ccn),
+            'npath'        => \array_reverse($npath),
+            'cr'           => \array_reverse($cr),
+            'rcr'          => \array_reverse($rcr),
+            'classLength'  => \array_reverse($classLength),
+            'methodLength' => \array_reverse($methodLength),
             'classes'      => $classes,
             'methods'      => $methods
-        );
+        ];
     }
 }
