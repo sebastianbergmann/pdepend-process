@@ -30,7 +30,8 @@ class Parser
 
         while ($reader->read()) {
             switch ($reader->name) {
-                case 'class': {
+                case 'class':
+                case 'trait': {
                     $class               = $reader->getAttribute('name');
                     $cr[$class]          = $reader->getAttribute('cr');
                     $rcr[$class]         = $reader->getAttribute('rcr');
